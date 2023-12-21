@@ -1,5 +1,7 @@
 CC=g++
-CFLAGS=-I./include
+CFLAGS=-Wall -I./include -I/home/carwyn/gsl/include
+LDFLAGS = -L/home/carwyn/gsl/lib
+LIBS = -lgsl -lgslcblas -lm
 SRCDIR=./src
 BUILDDIR=./build
 DEPS = $(wildcard $(SRCDIR)/*.h)
@@ -11,7 +13,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.cc $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
 
 .PHONY: all clean
 
